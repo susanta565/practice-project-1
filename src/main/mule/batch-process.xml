@@ -7,7 +7,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd">
 	<flow name="batch-processFlow" doc:id="9dc58975-a2d9-4252-961e-10a948fdbab3" >
 		<http:listener doc:name="Listener" doc:id="4d385ea0-031a-44a7-8007-e99df1b99249" config-ref="HTTP_Listener_config" allowedMethods="POST" path="batch-process"/>
-		<set-payload doc:name="Set Payload" doc:id="0ed7d76a-7762-4265-b660-799a66118e7f" value='#[[1,2,6,5,8,"g","k","y","u","t"]]'/>
+		<set-payload doc:name="Set Payload" doc:id="0ed7d76a-7762-4265-b660-799a66118e7f" value='#[[1,2,6,5,8,"g","k","y","u","t","h","g"]]'/>
 		<batch:job jobName="batch-processBatch_Job" doc:id="1cc49c40-781c-466c-8a60-a024d8a13460" >
 			<batch:process-records >
 				<batch:step name="Batch_Step" doc:id="304acab5-ca34-4ff1-a0e1-35bd0224d082" acceptPolicy="ALL">
