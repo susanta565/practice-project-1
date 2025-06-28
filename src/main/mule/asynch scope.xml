@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="asynch_scopeFlow" doc:id="82bac3e1-2495-4462-b7f0-47e30b900ba5" >
+		<http:listener doc:name="Listener" doc:id="35a238a9-25c1-451b-a159-b7c274e8b447" config-ref="HTTP_Listener_config" allowedMethods="post" path="asynch">
+			<http:error-response statusCode="200">
+				<http:body ><![CDATA[#[payload]]]></http:body>
+			</http:error-response>
+		</http:listener>
+		<logger level="INFO" doc:name="Logger" doc:id="dc06470f-aa5f-4dea-9b92-f7a9607e1991" message="#[payload....'']"/>
+		<logger level="INFO" doc:name="Logger" doc:id="628d86ec-4997-4e58-af1f-46f744762b57" message="#[payload]"/>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="19776d84-4f39-44a2-b461-0fed26f18c1f" type="ANY">
+				<ee:transform doc:name="Transform Message" doc:id="2b21425c-2292-4ca8-90bb-59d4b7a8a38e" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+        "name": "error in logger script"
+    
+  }]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+</mule>

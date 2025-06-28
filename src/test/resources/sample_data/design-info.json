@@ -1,0 +1,13 @@
+{
+  "sampleData": {
+    "cc4a728d-9de5-44f1-aa7a-982f30bc03df": {
+      "payload": "sample_data/covidcase.xml"
+    },
+    "e6595db1-6a89-48fb-9734-4e589f95653d": {
+      "payload": "sample_data/covidCase_1.xml"
+    },
+    "ef42b91f-0188-493b-9e63-7d2680cd7c2e": {
+      "payload": "sample_data/covidCase_2.xml"
+    }
+  }
+}

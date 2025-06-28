@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="5d71e934-8baa-4ee4-b9fd-186b3093f5b3" >
+		<http:listener-connection host="0.0.0.0" port="${secure::http.port}" />
+	</http:listener-config>
+	<flow name="setpayloadsecureFlow" doc:id="4c53e8e8-ce30-4f65-81c4-73c30ddb9c89" >
+		<http:listener doc:name="Listener" doc:id="081226e9-a5c2-4ef1-a0fb-0a051948e126" path="secure" config-ref="HTTP_Listener_config" allowedMethods="post">
+			<http:error-response >
+				<http:body ><![CDATA[#[error.description]]]></http:body>
+			</http:error-response>
+		</http:listener>
+		<logger level="INFO" doc:name="Logger" doc:id="e6fd569e-13cb-4765-a1ba-f17d7936e069" message="logger1" />
+		<set-payload value="payload" doc:name="Set Payload" doc:id="9fc27cba-9472-451f-bc8a-80111e341cbc" />
+		<logger level="INFO" doc:name="Logger" doc:id="cb8dee7c-ce64-401d-bb28-a35d87f52fb7" message="${secure::http.port}"/>
+		<logger level="INFO" doc:name="Logger" doc:id="26215704-2fb1-4161-b7e7-7352076a26f0" message="logger end"/>
+	</flow>
+</mule>
